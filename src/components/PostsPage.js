@@ -2,16 +2,22 @@ import React, { Component, Fragment } from 'react'
 import Post from '../components/Post'
 import { Query } from 'react-apollo'
 import  { gql } from 'apollo-boost'
+import Loader from 'react-loader-spinner'
 
-export default class DraftsPage extends Component {
+export default class PostsPage extends Component {
   render() {
     return (
-      <Query query={DRAFTS_QUERY}>
+      <Query query={FEED_QUERY}>
         {({ data, loading, error, refetch }) => {
           if (loading) {
             return (
-              <div className="flex w-100 h-100 items-center justify-center pt7">
-                <div>Loading ...</div>
+              <div>
+                <Loader
+                  type="TailSpin"
+                  color="#b0b1b4"
+                  height="100"
+                  width="100"
+               />
               </div>
             )
           }
@@ -25,16 +31,17 @@ export default class DraftsPage extends Component {
           }
           return (
             <Fragment>
-              <div className="flex justify-between items-center">
-                <h1>Drafts</h1>
+              <div>
+                <br /><br />
+                <h2>Completed Tasks<span>Your completed tasks.</span></h2>
               </div>
-              {data.drafts &&
-                data.drafts.map(draft => (
+              {data.feed &&
+                data.feed.map(post => (
                   <Post
-                    key={draft.id}
-                    post={draft}
+                    key={post.id}
+                    post={post}
                     refresh={() => refetch()}
-                    isDraft={!draft.published}
+                    isDraft={!post.published}
                   />
                 ))}
               {this.props.children}
@@ -46,12 +53,11 @@ export default class DraftsPage extends Component {
   }
 }
 
-export const DRAFTS_QUERY = gql`
-  query DraftsQuery {
-    drafts {
+export const FEED_QUERY = gql`
+  query FeedQuery {
+    feed {
       id
       title
-      content
       published
     }
   }

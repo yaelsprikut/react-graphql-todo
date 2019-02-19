@@ -31,7 +31,6 @@ class DetailPage extends Component {
           return (
             <Fragment>
               <h1 className="f3 black-80 fw4 lh-solid">{data.post.title}</h1>
-              <p className="black-80 fw3">{data.post.content}</p>
               {action}
             </Fragment>
           )
@@ -134,7 +133,6 @@ const POST_QUERY = gql`
     post(id: $id) {
       id
       title
-      content
       published
     }
   }

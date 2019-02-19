@@ -3,6 +3,8 @@ mutation {
     data: {
       title: "Join us for GraphQL Conf 2019 in Berlin"
       content: "https://www.graphqlconf.org/"
+      category: "somecat"
+      due_date: "somedate"
       published: true
     }
   ) {
@@ -13,6 +15,8 @@ mutation {
     data: {
       title: "Subscribe to GraphQL Weekly for community news"
       content: "https://graphqlweekly.com/"
+      category: "somecat"
+      due_date: "somedate"
       published: true
     }
   ) {
@@ -23,6 +27,8 @@ mutation {
     data: {
       title: "Follow Prisma on Twitter"
       content: "https://twitter.com/prisma"
+      due_date: "somedate"
+      category: "somecat"
     }
   ) {
     id

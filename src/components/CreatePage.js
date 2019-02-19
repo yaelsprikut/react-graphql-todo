@@ -8,6 +8,8 @@ class CreatePage extends Component {
   state = {
     title: '',
     content: '',
+    category: '',
+    due_date: '',
   }
 
   render() {
@@ -24,7 +26,8 @@ class CreatePage extends Component {
       >
         {(createDraft, { data, loading, error }) => {
           return (
-            <div className="pa4 flex justify-center bg-white">
+            <div className="background">
+            <h2>Add task</h2>
               <form
                 onSubmit={async e => {
                   e.preventDefault()
@@ -33,36 +36,35 @@ class CreatePage extends Component {
                     variables: { title, content },
                   })
                   this.props.history.replace('/drafts')
-                }}
-              >
-                <h1>Create Draft</h1>
+                  this.props.history.replace('/')
+                }}>
                 <input
                   autoFocus
-                  className="w-100 pa2 mv2 br2 b--black-20 bw1"
                   onChange={e => this.setState({ title: e.target.value })}
-                  placeholder="Title"
+                  placeholder="Add a to do..."
                   type="text"
                   value={this.state.title}
-                />
-                <textarea
-                  className="db w-100 ba bw1 b--black-20 pa2 br2 mb2"
-                  cols={50}
+                />&nbsp;
+                <input
                   onChange={e => this.setState({ content: e.target.value })}
-                  placeholder="Content"
+                  placeholder="Add description..."
                   rows={8}
                   value={this.state.content}
-                />
+                /><br/>
                 <input
-                  className={`pa3 bg-black-10 bn ${this.state.content &&
-                    this.state.title &&
-                    'dim pointer'}`}
-                  disabled={!this.state.content || !this.state.title}
-                  type="submit"
-                  value="Create"
-                />
-                <a className="f6 pointer" onClick={this.props.history.goBack}>
-                  or cancel
-                </a>
+                  autoFocus
+                  onChange={e => this.setState({ category: e.target.value })}
+                  placeholder="Select Category"
+                  type="text"
+                  value={this.state.category}
+                />&nbsp;
+                <input
+                  onChange={e => this.setState({ due_date: e.target.value })}
+                  placeholder="Add due_date..."
+                  rows={8}
+                  value={this.state.due_date}
+                /><br />
+                <button type="submit">Add item</button>
               </form>
             </div>
           )
@@ -74,11 +76,13 @@ class CreatePage extends Component {
 }
 
 const CREATE_DRAFT_MUTATION = gql`
-  mutation CreateDraftMutation($title: String!, $content: String!) {
-    createDraft(title: $title, content: $content) {
+  mutation CreateDraftMutation($title: String!, $content: String!, $category: String!, $due_date: String!) {
+    createDraft(title: $title, content: $content, category: $category, due_date: $due_date) {
       id
       title
       content
+      category
+      due_date
     }
   }
 `
