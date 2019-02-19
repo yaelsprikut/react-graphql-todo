@@ -40,6 +40,8 @@ type Post {
   published: Boolean!
   title: String!
   content: String!
+  category: String!
+  due_date: String!
 }
 
 type PostConnection {
@@ -52,6 +54,8 @@ input PostCreateInput {
   published: Boolean
   title: String!
   content: String!
+  category: String!
+  due_date: String!
 }
 
 type PostEdge {
@@ -68,6 +72,10 @@ enum PostOrderByInput {
   title_DESC
   content_ASC
   content_DESC
+  category_ASC
+  category_DESC
+  due_date_ASC
+  due_date_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -79,6 +87,8 @@ type PostPreviousValues {
   published: Boolean!
   title: String!
   content: String!
+  category: String!
+  due_date: String!
 }
 
 type PostSubscriptionPayload {
@@ -103,12 +113,16 @@ input PostUpdateInput {
   published: Boolean
   title: String
   content: String
+  category: String
+  due_date: String
 }
 
 input PostUpdateManyMutationInput {
   published: Boolean
   title: String
   content: String
+  category: String
+  due_date: String
 }
 
 input PostWhereInput {
@@ -156,6 +170,34 @@ input PostWhereInput {
   content_not_starts_with: String
   content_ends_with: String
   content_not_ends_with: String
+  category: String
+  category_not: String
+  category_in: [String!]
+  category_not_in: [String!]
+  category_lt: String
+  category_lte: String
+  category_gt: String
+  category_gte: String
+  category_contains: String
+  category_not_contains: String
+  category_starts_with: String
+  category_not_starts_with: String
+  category_ends_with: String
+  category_not_ends_with: String
+  due_date: String
+  due_date_not: String
+  due_date_in: [String!]
+  due_date_not_in: [String!]
+  due_date_lt: String
+  due_date_lte: String
+  due_date_gt: String
+  due_date_gte: String
+  due_date_contains: String
+  due_date_not_contains: String
+  due_date_starts_with: String
+  due_date_not_starts_with: String
+  due_date_ends_with: String
+  due_date_not_ends_with: String
   AND: [PostWhereInput!]
   OR: [PostWhereInput!]
   NOT: [PostWhereInput!]
@@ -177,3 +219,4 @@ type Subscription {
 }
 `
       }
+    

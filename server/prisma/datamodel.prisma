@@ -3,4 +3,6 @@ type Post {
   published: Boolean! @default(value: "false")
   title: String!
   content: String!
+  category: String!
+  due_date: String!
 }
