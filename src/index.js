@@ -15,6 +15,7 @@ import DraftsPage from './components/DraftsPage'
 import CreatePage from './components/CreatePage'
 import DetailPage from './components/DetailPage'
 import PostsPage from './components/PostsPage'
+import EditPage from './components/EditPage'
 
 import 'tachyons'
 import './index.css'
@@ -32,6 +33,7 @@ ReactDOM.render(
             <Route path="/posts" component={PostsPage} />
             <Route path="/create" component={CreatePage} />
             <Route path="/post/:id" component={DetailPage} />
+            <Route path="/edit/:id" component={EditPage} />
           </Switch>
         </div>
       </Fragment>

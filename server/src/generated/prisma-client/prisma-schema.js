@@ -40,8 +40,8 @@ type Post {
   published: Boolean!
   title: String!
   content: String!
-  category: String!
-  due_date: String!
+  category: String
+  due_date: String
 }
 
 type PostConnection {
@@ -54,8 +54,8 @@ input PostCreateInput {
   published: Boolean
   title: String!
   content: String!
-  category: String!
-  due_date: String!
+  category: String
+  due_date: String
 }
 
 type PostEdge {
@@ -87,8 +87,8 @@ type PostPreviousValues {
   published: Boolean!
   title: String!
   content: String!
-  category: String!
-  due_date: String!
+  category: String
+  due_date: String
 }
 
 type PostSubscriptionPayload {

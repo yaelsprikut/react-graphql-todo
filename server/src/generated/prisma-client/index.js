@@ -15,3 +15,9 @@ exports.Prisma = prisma_lib_1.makePrismaClientClass({
   endpoint: `https://us1.prisma.sh/public-braveleader-354/yael-todo/dev`
 });
 exports.prisma = new exports.Prisma();
+var models = [
+  {
+    name: "Post",
+    embedded: false
+  }
+];

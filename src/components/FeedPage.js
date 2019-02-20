@@ -118,11 +118,13 @@ export const FEED_QUERY = gql`
   }
 `
 const CREATE_DRAFT_MUTATION = gql`
-  mutation CreateDraftMutation($title: String!, $content: String!) {
+  mutation CreateDraftMutation($title: String!, $content: String!, $category: String!, $due_date: String!) {
     createDraft(title: $title, content: $content) {
       id
       title
       content
+      category
+      due_date
     }
   }
 `

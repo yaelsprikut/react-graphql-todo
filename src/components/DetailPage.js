@@ -7,6 +7,8 @@ import { FEED_QUERY } from './FeedPage'
 
 class DetailPage extends Component {
   render() {
+    console.log('DetailsPage ====> ', this.props);
+
     return (
       <Query query={POST_QUERY} variables={{ id: this.props.match.params.id }}>
         {({ data, loading, error }) => {

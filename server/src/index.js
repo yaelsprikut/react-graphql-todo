@@ -14,10 +14,12 @@ const resolvers = {
     },
   },
   Mutation: {
-    createDraft(parent, { title, content }, context) {
+    createDraft(parent, { title, content, category, due_date }, context) {
       return context.prisma.createPost({
         title,
         content,
+        category,
+        due_date
       })
     },
     deletePost(parent, { id }, context) {

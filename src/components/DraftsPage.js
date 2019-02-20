@@ -52,6 +52,8 @@ export const DRAFTS_QUERY = gql`
       id
       title
       content
+      category
+      due_date
       published
     }
   }

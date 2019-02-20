@@ -12,6 +12,9 @@ export default class Post extends Component {
     let action = this._renderAction(this.props.post);
     let title = this.props.post.title
     let content = this.props.post.content
+    let category = this.props.post.category
+    let date = this.props.post.due_date
+
     let isPending = '';
     if(this.props.post.published === false) {
       isPending = "Pending"
@@ -23,29 +26,60 @@ export default class Post extends Component {
     }
 
     return (
-      <Link className="no-underline ma1" to={`/post/${this.props.post.id}`}>
         <li>
-          <span className="label">{title}<hr /><br />
+          <span className="label">
+          <Link className="no-underline ma1" to={`/edit/${this.props.post.id}`}>{title}</Link><hr /><br />
           <span className="smalldescription">
           Description: {content}<br/>
           Status: {isPending}<br/>
-          Due Date:<br/>
-          Category:
+          Category: {category}<br/>
+          Due Date: {date}
           </span>
           </span>
           <div className="actions">
-            <button className="btn-picto" type="button">
+            {/*<button className="btn-picto" type="button">
               <i aria-hidden="true" className="material-icons">{this.props.post.published ? 'check_box' : 'check_box_outline_blank' }</i>
-            </button>
+            </button>*/}
             <button className="btn-picto" type="button" aria-label="Delete" title="Delete">
               <i aria-hidden="true" className="material-icons">{action}</i>
             </button>
           </div>
         </li>
-      </Link>
     )
   }
   _renderAction = ({ id }) => {
+    const publishMutation = (
+      <Mutation
+        mutation={PUBLISH_MUTATION}
+        update={(cache, { data }) => {
+          const { drafts } = cache.readQuery({ query: DRAFTS_QUERY })
+          const { feed } = cache.readQuery({ query: FEED_QUERY })
+          cache.writeQuery({
+            query: FEED_QUERY,
+            data: { feed: feed.concat([data.publish]) },
+          })
+          cache.writeQuery({
+            query: DRAFTS_QUERY,
+          })
+        }}
+      >
+        {(publish, { data, loading, error }) => {
+          return (
+            <button
+              className="btn-picto"
+              onClick={async () => {
+                await publish({
+                  variables: { id },
+                })
+                window.location.replace('/')
+              }}
+            >
+              {this.props.post.published ? 'check_box' : 'check_box_outline_blank' }
+            </button>
+          )
+        }}
+      </Mutation>
+    )
     const deleteMutation = (
       <Mutation
         mutation={DELETE_MUTATION}
@@ -86,22 +120,13 @@ export default class Post extends Component {
     )
       return (
         <Fragment>
+          {publishMutation}
           {deleteMutation}
         </Fragment>
       )
     return deleteMutation
   }
 }
-
-const POST_QUERY = gql`
-  query PostQuery($id: ID!) {
-    post(id: $id) {
-      id
-      title
-      published
-    }
-  }
-`
 
 const PUBLISH_MUTATION = gql`
   mutation PublishMutation($id: ID!) {

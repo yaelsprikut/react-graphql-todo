@@ -18,14 +18,20 @@ html {
   box-sizing: inherit;
 }
 
+a {
+  color: #FFF;
+  font-weight: 600;
+}
+
 .doneitems {
   background-color: #c5cae9 !important;
 }
 
 .smalldescription {
   color: #FFF;
-  font-size: 0.89rem;
+  font-size: 0.99rem;
   text-transform: none !important;
+  line-height: 1.4rem;
 }
 .post {
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
@@ -243,7 +249,8 @@ form button:hover {
 	background:#FF5E5E;
 }
 form input,
-form button {
+form button,
+form select {
 	font-family:'Quicksand', sans-serif;
 	height:3rem;
 }
