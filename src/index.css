@@ -205,12 +205,13 @@ html, body {
 	animation:strikeitem .3s ease-out 0s forwards;
 }
 #todolist .btn-picto,
-#donelist .btn-picto {
+#donelist .btn-picto, .btn-picto a {
 	border:none;
 	background:none;
 	-webkit-appearance:none;
 	cursor:pointer;
 	color:#FFF;
+  font-size: 3rem;
 }
 
 

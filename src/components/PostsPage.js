@@ -58,6 +58,8 @@ export const FEED_QUERY = gql`
     feed {
       id
       title
+      content
+      due_date
       published
     }
   }

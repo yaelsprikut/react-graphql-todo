@@ -43,7 +43,6 @@ export default class FeedPage extends Component {
               <h1>Yael's TO-DO List<span>You can add, edit, and delete tasks.</span></h1>
               <br />
               <CreatePage />
-              <br />
               <ul>
               {data.drafts &&
                 data.drafts.map(post => (

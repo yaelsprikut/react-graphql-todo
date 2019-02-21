@@ -107,7 +107,7 @@ export default class Post extends Component {
                   await deletePost({
                     variables: { id },
                   })
-                  window.location.replace('/')
+                  // window.location.replace('/')
                 }else {
                   e.preventDefault()
                 }

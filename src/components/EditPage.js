@@ -99,6 +99,8 @@ const POST_QUERY = gql`
     post(id: $id) {
       id
       title
+      content
+      due_date
       published
     }
   }
