@@ -31,7 +31,6 @@ ReactDOM.render(
             <Route exact path="/" component={FeedPage} />
             <Route path="/drafts" component={DraftsPage} />
             <Route path="/posts" component={PostsPage} />
-            <Route path="/create" component={CreatePage} />
             <Route path="/post/:id" component={DetailPage} />
             <Route path="/edit/:id" component={EditPage} />
           </Switch>
