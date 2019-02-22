@@ -8,6 +8,9 @@ node_modules
 coverage
 # production
 #build
+public/*
+build/static/css/*.map
+build/static/js/*.map
 .netlify
 
 # misc

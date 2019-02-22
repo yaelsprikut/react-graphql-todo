@@ -11,6 +11,7 @@
     "react-scripts": "2.1.1"
   },
   "dependencies": {
+    "react-scripts": "2.1.1",
     "apollo-boost": "0.1.28",
     "graphql": "14.0.2",
     "react": "16.8.2",
