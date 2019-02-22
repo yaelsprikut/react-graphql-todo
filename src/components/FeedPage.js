@@ -39,9 +39,11 @@ export default class FeedPage extends Component {
 
           return (
             <Fragment>
+
             <main id="todolist">
               <h1>Yael's TO-DO List<span>You can add, edit, and delete tasks.</span></h1>
               <br />
+            
               <CreatePage />
               <ul>
               {data.drafts &&

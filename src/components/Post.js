@@ -28,7 +28,7 @@ export default class Post extends Component {
     return (
         <li>
           <span className="label">
-          <Link className="no-underline ma1" to={`/edit/${this.props.post.id}`}>{title}</Link><hr /><br />
+          <Link className="no-underline ma1" to={`/edit/${this.props.post.id}`}>{title}</Link><br/>
           <span className="smalldescription">
           Description: {content}<br/>
           Status: {isPending}<br/>

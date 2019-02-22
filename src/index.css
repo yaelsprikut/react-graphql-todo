@@ -23,6 +23,10 @@ a {
   font-weight: 600;
 }
 
+.ma1 {
+  margin: 0 !important;
+}
+
 .doneitems {
   background-color: #c5cae9 !important;
 }
@@ -97,13 +101,13 @@ html, body {
 	background:#f8f3fe;
 	font-size:1.1rem;
 	font-family:'Quicksand', sans-serif;
-	height:100%;
+	height:auto;
 }
 @keyframes strikeitem {
 	to { width:calc(100% + 1rem); }
 }
 
-#todolist {
+#createitem {
 	margin:4rem auto;
 	padding:2rem 3rem 3rem;
 	max-width:800px;
@@ -111,10 +115,19 @@ html, body {
 	color:#FFF;
 	box-shadow:-20px -20px 0px 0px rgba(100,100,100,.1);
 }
+
+#todolist {
+	margin:4rem auto;
+	padding:1rem 2rem 2rem;
+	max-width:90%;
+	background:#3f51b5;
+	color:#FFF;
+	box-shadow:-20px -20px 0px 0px rgba(100,100,100,.1);
+}
 #donelist {
 	margin:4rem auto;
-	padding:2rem 3rem 3rem;
-	max-width:800px;
+	padding:1rem 2rem 2rem;
+	max-width:90%;
 	background: #3b3c45;
 	color:#FFF;
 	box-shadow:-20px -20px 0px 0px rgba(100,100,100,.1);
@@ -306,4 +319,14 @@ form select {
 .togglebutton-wrapper.togglebutton-checked .tooglebutton-box:before {
 	left:calc(100% - 4px - 16px);
 	opacity:1;
+}
+
+@media only screen and (max-width: 900px) {
+  #todolist .btn-picto,
+  #donelist .btn-picto, .btn-picto a {
+    font-size: 2rem;
+  }
+  button, input {
+    overflow: hidden !important;
+  }
 }
