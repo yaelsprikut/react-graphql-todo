@@ -1,6 +1,10 @@
 {
   "name": "react-fullstack-basic",
   "version": "1.0.0",
+  "engines": {
+    "yarn": "1.x"
+  },
+  "homepage": "https://yael-todo.herokuapp.com/",
   "devDependencies": {
     "react-scripts": "2.1.1"
   },
