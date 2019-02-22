@@ -25,6 +25,17 @@ const resolvers = {
     deletePost(parent, { id }, context) {
       return context.prisma.deletePost({ id })
     },
+    update(parent, { id, title, content, category, due_date }, context) {
+      return context.prisma.updatePost({
+        where: { id },
+        data: {
+          title,
+          content,
+          category,
+          due_date
+         },
+      })
+    },
     publish(parent, { id }, context) {
       return context.prisma.updatePost({
         where: { id },

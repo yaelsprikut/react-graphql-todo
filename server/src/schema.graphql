@@ -7,6 +7,7 @@ type Query {
 type Mutation {
   createDraft(title: String!, content: String!, category: String, due_date: String): Post
   deletePost(id: ID!): Post
+  update(id: ID!, title: String, content: String, category: String, due_date: String): Post
   publish(id: ID!): Post
 }
 

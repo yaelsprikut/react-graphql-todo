@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { Mutation, Query } from 'react-apollo'
 import  { gql } from 'apollo-boost'
 import { DRAFTS_QUERY } from './DraftsPage'
+import { FEED_QUERY } from './FeedPage'
 
 class EditPage extends Component {
   state = {
@@ -13,15 +14,15 @@ class EditPage extends Component {
   }
 
   render() {
-    console.log('edit post', this.props)
     // let title = this.props.post.title
     return (
       <Query query={POST_QUERY} variables={{ id: this.props.match.params.id }}>
         {({ data, loading, error, refetch }) => {
-          let editMute = this._renderAction(data);
+          let postID = data.id;
+          let postData = data.post;
+          let editMute = this._renderAction(postData);
           if (loading) return "Loading...";
           if (error) return `Error! ${error.message}`;
-          console.log('data )))))  ', data)
           return (
             <div>{editMute}</div>
           )
@@ -29,19 +30,25 @@ class EditPage extends Component {
       </Query>
     )
   }
-  _renderAction = (data) => {
+  _renderAction = (postdata) => {
     const editMutation = (
-       <Mutation
+    <Mutation
     mutation={UPDATE_DRAFT_MUTATION}
     update={(cache, { data }) => {
       const { drafts } = cache.readQuery({ query: DRAFTS_QUERY })
+      const { feed } = cache.readQuery({ query: FEED_QUERY })
+      cache.writeQuery({
+        query: FEED_QUERY,
+        data: { feed: feed.concat([data.update]) },
+      })
       cache.writeQuery({
         query: DRAFTS_QUERY,
-        data: { drafts: drafts.concat([data.updateDraft]) },
+        data: { feed: feed.concat([data.update]) },
       })
     }}
   >
-    {(updateDraft, { loading, error }) => {
+
+    {(update, { data, loading, error }) => {
       return (
         <main id="todolist">
           <div className="background">
@@ -49,9 +56,13 @@ class EditPage extends Component {
             <form
               onSubmit={async e => {
                 e.preventDefault()
+                console.log('id', this.props.match.params.id );
+                console.log(this.state)
+                let postid = postdata.id;
+                console.log(postid);
                 const { title, content, category, due_date } = this.state
-                await updateDraft({
-                  variables: { title, content, category, due_date },
+                await update({
+                  variables: { id: postid, title: title, content: content, category: category, due_date: due_date},
                 })
                 this.props.history.replace('/drafts')
                 this.props.history.replace('/')
@@ -59,20 +70,19 @@ class EditPage extends Component {
               <input
                 autoFocus
                 onChange={e => this.setState({ title: e.target.value })}
-                placeholder={data.post.title}
+                placeholder={postdata.title}
                 type="text"
               />&nbsp;
               <input
                 onChange={e => this.setState({ content: e.target.value })}
-                placeholder={data.post.content}
+                placeholder={postdata.content}
                 rows={8}
               /><br/>
               <select
               onChange={e => this.setState({ category: e.target.value })}
-              value={this.state.category}
               placeholder="Select Category"
               name="category">
-                 <option default>Select Category</option>
+                 <option>{postdata.category}</option>
                  <option value="Chores">Chores</option>
                  <option value="Entertainment">Entertainment</option>
                  <option value="Family">Family</option>
@@ -81,7 +91,8 @@ class EditPage extends Component {
                 &nbsp;
               <input
                 onChange={e => this.setState({ due_date: e.target.value })}
-                placeholder="Add due_date..."
+                type="date"
+                placeholder={postdata.due_date}
                 rows={8}
                 value={this.state.due_date}
               /><br />
@@ -102,6 +113,7 @@ const POST_QUERY = gql`
       id
       title
       content
+      category
       due_date
       published
     }
@@ -109,8 +121,8 @@ const POST_QUERY = gql`
 `
 
 const UPDATE_DRAFT_MUTATION = gql`
-  mutation UpdateDraftMutation($title: String!, $content: String!, $category: String!, $due_date: String!) {
-    updateDraft(title: $title, content: $content, category: $category, due_date: $due_date) {
+  mutation UpdateMutation($id: ID!, $title: String, $content: String, $category: String, $due_date: String) {
+    update(id: $id, title: $title, content: $content, category: $category, due_date: $due_date) {
       id
       title
       content

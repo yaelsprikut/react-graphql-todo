@@ -18,6 +18,7 @@ class CreatePage extends Component {
         mutation={CREATE_DRAFT_MUTATION}
         update={(cache, { data }) => {
           const { drafts } = cache.readQuery({ query: DRAFTS_QUERY })
+          console.log(data);
           cache.writeQuery({
             query: DRAFTS_QUERY,
             data: { drafts: drafts.concat([data.createDraft]) },
