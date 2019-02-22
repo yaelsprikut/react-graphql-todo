@@ -4,8 +4,6 @@
   "engines": {
     "yarn": "1.x"
   },
-  "heroku-postbuild": "echo This runs afterwards",
-  "heroku-postbuild": "cd server && yarn install && yarn start | yarn install && yarn start",
   "homepage": "https://yael-todo.herokuapp.com/",
   "devDependencies": {
     "react-scripts": "2.1.1"
@@ -26,6 +24,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "heroku-postbuild": "echo This runs afterwards",
+    "heroku-postbuild": "cd server && yarn install && yarn start | yarn install && yarn start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
