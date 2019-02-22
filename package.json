@@ -4,6 +4,8 @@
   "engines": {
     "yarn": "1.x"
   },
+  "heroku-postbuild": "echo This runs afterwards",
+  "heroku-postbuild": "cd server && yarn install && yarn start | yarn install && yarn start",
   "homepage": "https://yael-todo.herokuapp.com/",
   "devDependencies": {
     "react-scripts": "2.1.1"
