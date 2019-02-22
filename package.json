@@ -25,7 +25,8 @@
   "scripts": {
     "start": "react-scripts start",
     "heroku-postbuild": "echo This runs afterwards",
-    "heroku-postbuild": "cd server && yarn install && yarn start | yarn install && yarn start",
+    "heroku-postbuild": "cd server && yarn install && yarn start",
+    "heroku-postbuild":"yarn install && yarn start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
